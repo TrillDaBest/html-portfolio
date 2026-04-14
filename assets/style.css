@@ -1,0 +1,271 @@
+/* ============================================================
+   Skeet / CS:GO cheat GUI aesthetic
+   Palette: near-black backgrounds · green accents · subtle bevels
+   ============================================================ */
+
+:root {
+  --bg-root:        #0c0c0c;
+  --bg-window:      #161616;
+  --bg-panel:       #1c1c1c;
+  --bg-header:      #141414;
+  --border-outer:   #111111;
+  --border-inner:   #2a2a2a;
+  --border-hi:      #333333;
+  --accent:         #39d353;   /* main green */
+  --accent-dim:     #1e7a2f;
+  --accent-glow:    rgba(57, 211, 83, 0.12);
+  --text-primary:   #d8d8d8;
+  --text-secondary: #888888;
+  --text-accent:    #39d353;
+  --link-color:     #39d353;
+  --link-hover:     #7aff9e;
+  --rainbow-h:      4px;
+}
+
+/* ── Reset / base ─────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 15px;
+}
+
+body {
+  background-color: var(--bg-root);
+  color: var(--text-primary);
+  font-family: 'Segoe UI', 'Arial', sans-serif;
+  min-height: 100vh;
+  padding-top: calc(var(--rainbow-h) + 24px); /* room for fixed rainbow bar */
+}
+
+/* ── Rainbow bar ──────────────────────────────────────────── */
+.rainbow-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--rainbow-h);
+  background: linear-gradient(
+    to right,
+    #ff0000,
+    #ff7f00,
+    #ffff00,
+    #00ff00,
+    #00bfff,
+    #8b00ff,
+    #ff0000
+  );
+  z-index: 9999;
+  /* crisp edge at bottom */
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* ── Page wrapper (GUI window) ────────────────────────────── */
+.window {
+  max-width: 860px;
+  margin: 20px auto 40px;
+  background: var(--bg-window);
+  border: 1px solid var(--border-inner);
+  /* bevel: bright top/left, dark bottom/right */
+  box-shadow:
+    inset 1px 1px 0 var(--border-hi),
+    inset -1px -1px 0 var(--border-outer),
+    0 4px 24px rgba(0, 0, 0, 0.7);
+  border-radius: 3px;
+}
+
+/* ── Window title bar ─────────────────────────────────────── */
+.window-titlebar {
+  background: var(--bg-header);
+  border-bottom: 1px solid var(--border-inner);
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 3px 3px 0 0;
+}
+
+.window-titlebar .title-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+  flex-shrink: 0;
+}
+
+.window-titlebar h1,
+.window-titlebar .window-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.window-titlebar h1 {
+  font-size: 1rem;
+  color: var(--text-primary);
+  letter-spacing: 0.05em;
+}
+
+/* ── Window body / content area ──────────────────────────── */
+.window-body {
+  padding: 20px 20px 24px;
+}
+
+/* ── Panel (inner card / section) ────────────────────────── */
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-inner);
+  box-shadow:
+    inset 1px 1px 0 var(--border-hi),
+    inset -1px -1px 0 var(--border-outer);
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+
+.panel-header {
+  background: var(--bg-header);
+  border-bottom: 1px solid var(--border-inner);
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.panel-body {
+  padding: 14px 12px;
+}
+
+/* ── Divider ──────────────────────────────────────────────── */
+hr {
+  border: none;
+  border-top: 1px solid var(--border-inner);
+  margin: 14px 0;
+}
+
+/* ── Headings inside content ──────────────────────────────── */
+h1 { font-size: 1.35rem; color: var(--text-primary);  margin-bottom: 6px; }
+h2 { font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 10px; font-weight: 400; }
+h3 { font-size: 0.95rem; color: var(--accent); margin: 12px 0 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* ── Paragraphs & lists ───────────────────────────────────── */
+p, li {
+  line-height: 1.65;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+ol, ul {
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+/* ── Links ────────────────────────────────────────────────── */
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+/* ── Navigation bar ───────────────────────────────────────── */
+.nav-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 12px 14px;
+  background: var(--bg-header);
+  border-bottom: 1px solid var(--border-inner);
+}
+
+.nav-bar a {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 4px 10px;
+  border: 1px solid var(--border-inner);
+  border-radius: 2px;
+  color: var(--text-secondary);
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.nav-bar a:hover,
+.nav-bar a.active {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+  background: var(--accent-glow);
+  text-decoration: none;
+}
+
+/* ── Project list items ───────────────────────────────────── */
+.project-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.project-item a {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.project-item img {
+  border: 1px solid var(--border-inner);
+  border-radius: 2px;
+  max-width: 100%;
+  display: block;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Info rows (key : value) ──────────────────────────────── */
+.info-row {
+  display: flex;
+  gap: 8px;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border-outer);
+  font-size: 0.88rem;
+}
+
+.info-row:last-child { border-bottom: none; }
+
+.info-label {
+  color: var(--text-secondary);
+  min-width: 90px;
+  flex-shrink: 0;
+}
+
+.info-value {
+  color: var(--text-primary);
+}
+
+/* ── Accent text helper ───────────────────────────────────── */
+.accent { color: var(--accent); }
+
+/* ── Images ───────────────────────────────────────────────── */
+img {
+  max-width: 100%;
+  border-radius: 2px;
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .window {
+    margin: 10px;
+  }
+}
